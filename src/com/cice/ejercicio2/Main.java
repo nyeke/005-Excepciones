@@ -30,12 +30,10 @@ public class Main {
                     //datosFichero = almacen.recuperarNumeros();
                     System.out.println("Estos son los datos guardados: ");
                     almacen.recuperarNumeros();
-                    //for (Integer d:datosFichero) {
-                    //    System.out.println(d);
-                    //}
                     break;
                 case 3:
                     System.out.println("Hasta pronto");
+                    break;
                 default:
                     System.out.println("Opcion no valida");
             }

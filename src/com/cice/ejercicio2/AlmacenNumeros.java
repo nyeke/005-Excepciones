@@ -12,18 +12,18 @@ public class AlmacenNumeros {
 
     public void guardarNumero(Integer numero){
         try {
-            FileWriter fichero = new FileWriter("file.txt");
+            FileWriter fichero = new FileWriter("src/file.txt");
             fichero.write(numero);
             fichero.close();
         }
         catch (IOException e){
-            System.out.println("No se puede excribir en el Fichero");
+            System.out.println("No se puede escribir en el Fichero");
         }
     }
 
     public ArrayList<Integer> recuperarNumeros(){
         try{
-            FileReader fichero = new FileReader("file.txt");
+            FileReader fichero = new FileReader("src/file.txt");
             BufferedReader buffer = new BufferedReader(fichero);
             while(buffer.readLine()!=null){
                 numeros.add(Integer.parseInt(buffer.readLine()));
