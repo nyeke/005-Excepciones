@@ -36,9 +36,9 @@ public class Aplicacion {
                 case 2:
                     List<Integer> lista = almacen.recuperarNumeros();
                     System.out.println("Estos son los datos: ");
-                    almacen.recuperarNumeros();
                     break;
                 case 3:
+                    almacen.cerrarRecursos();
                     System.out.println("Hasta pronto");
                     break;
                 default:
