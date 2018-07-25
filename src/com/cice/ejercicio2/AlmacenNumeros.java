@@ -1,36 +1,46 @@
 package com.cice.ejercicio2;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AlmacenNumeros {
 
-    private ArrayList<Integer> numeros = new ArrayList<>();
+    private File fichero;
+    private FileWriter writer;
+    private BufferedReader reader;
+    private List<Integer> numeros = new ArrayList<>();
+
+    public AlmacenNumeros(){
+        prepararRecursos();
+    }
+
+    //Almacenar el dato en el fichero
 
     public void guardarNumero(Integer numero){
         try {
-            FileWriter fichero = new FileWriter("src/file.txt");
-            fichero.write(numero);
-            fichero.close();
+            writer.append(String.valueOf(numero));
+            writer.append("\n");
+            writer.flush();
         }
         catch (IOException e){
             System.out.println("No se puede escribir en el Fichero");
         }
     }
 
-    public ArrayList<Integer> recuperarNumeros(){
+    //Recuperar los datos del fichero
+
+    public List<Integer> recuperarNumeros(){
         try{
-            FileReader fichero = new FileReader("src/file.txt");
-            BufferedReader buffer = new BufferedReader(fichero);
-            while(buffer.readLine()!=null){
-                numeros.add(Integer.parseInt(buffer.readLine()));
-            }
-            for (Integer d:numeros) {
-                System.out.println(d);
-            }
+            String [] split = reader.readLine().split(";");
+            List<String> strings = Arrays.asList(split);
+            Stream<Integer> integerStream = strings.stream().map(cadena -> Integer.parseInt(cadena));
+            List<Integer> collect = integerStream.collect(Collectors.toList());
+
         }
         catch (IOException e){
             System.out.println("No se puede leer el fichero");
@@ -39,5 +49,20 @@ public class AlmacenNumeros {
             System.out.println("Error de formato en la datos recuperados");
         }
         return numeros;
+    }
+
+    // Prepara el fichero
+
+    private void prepararRecursos() {
+        this.fichero = new File("src/file.txt");
+        try {
+            if (!this.fichero.exists()) {
+                this.fichero.createNewFile();
+            }
+            this.writer = new FileWriter(this.fichero);
+            this.reader = new InputStreamReader(this.fichero);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

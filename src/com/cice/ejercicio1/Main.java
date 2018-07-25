@@ -54,8 +54,7 @@ public class Main {
 
         /* Solucion Manual
 
-        BufferedReader bf=new BufferedReader(new
-		InputStreamReader(System.in));
+        BufferedReader bf=new BufferedReader(newInputStreamReader(System.in));
 		System.out.println("Introduce el total de parámetros que
 		quieres mostrar");
 		try{
