@@ -12,11 +12,12 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> datos = new ArrayList<>();
-        Integer numero = 0;
+        Integer numero = 1;
+        boolean salir = false;
 
         // Recuperamos los datos que vaya introduciendo
         do {
-            System.out.println("Introduzca numeros. Para terminar pulse 0");
+            System.out.println("Introduzca numeros. Para mostrar datos teclee 0");
             try {
                 numero = Integer.parseInt(sc.nextLine());
                 if (numero != 0){
@@ -27,23 +28,28 @@ public class Main {
             {
                 System.out.println("Debe introducir un numero");
             }
+            catch (Exception e){
+                System.out.println("El formato no es valido");
+            }
         }while(numero != 0);
 
-        System.out.print("Dinos cuantos numeros quieres mostrar: ");
-
         // Mostramos el numero de datos que haya indicado el usuario
-        try{
-            int mostrar = Integer.parseInt(sc.nextLine());
-            for (int i = 0; i<mostrar; i++){
-                System.out.println(datos.get(i));
+        do {
+            System.out.print("Dinos cuantos numeros quieres mostrar: ");
+            try {
+                int mostrar = Integer.parseInt(sc.nextLine());
+                mostrar--;
+                int prueba = datos.get(mostrar);
+                for (int i = 0; i <= mostrar; i++) {
+                    System.out.println(datos.get(i));
+                }
+                salir = true;
+            } catch (NumberFormatException x) {
+                System.out.println("Debe introducir un numero");
+            } catch (IndexOutOfBoundsException x) {
+                System.out.println("No hay tantos datos");
             }
-        }
-        catch (NumberFormatException x){
-            System.out.println("Debe introducir un numero");
-        }
-        catch (IndexOutOfBoundsException x){
-            System.out.println("No hay tantos datos");
-        }
+        } while (!salir);
 
 
         /* Solucion Manual
